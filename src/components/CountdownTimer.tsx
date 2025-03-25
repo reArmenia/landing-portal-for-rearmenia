@@ -16,6 +16,7 @@ const CountdownTimer = () => {
     minutes: 0,
     seconds: 0
   });
+  const [isExpired, setIsExpired] = useState<boolean>(false);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -28,8 +29,10 @@ const CountdownTimer = () => {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60)
         });
+        setIsExpired(false);
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsExpired(true);
       }
     };
 
@@ -46,27 +49,31 @@ const CountdownTimer = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-lg text-rearmenia-blue mb-2">Վերջնաժամկետ՝ ապրիլի 4</div>
-      <div className="flex gap-4">
-        <div className="flex flex-col items-center">
-          <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.days)}</div>
-          <div className="text-xs uppercase text-gray-500">օր</div>
+      {isExpired ? (
+        <div className="text-4xl font-bold text-rearmenia-blue">Ավարտված է</div>
+      ) : (
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.days)}</div>
+            <div className="text-xs uppercase text-gray-500">օր</div>
+          </div>
+          <div className="text-4xl text-rearmenia-blue">:</div>
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.hours)}</div>
+            <div className="text-xs uppercase text-gray-500">ժամ</div>
+          </div>
+          <div className="text-4xl text-rearmenia-blue">:</div>
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.minutes)}</div>
+            <div className="text-xs uppercase text-gray-500">րոպե</div>
+          </div>
+          <div className="text-4xl text-rearmenia-blue">:</div>
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.seconds)}</div>
+            <div className="text-xs uppercase text-gray-500">վրկ</div>
+          </div>
         </div>
-        <div className="text-4xl text-rearmenia-blue">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.hours)}</div>
-          <div className="text-xs uppercase text-gray-500">ժամ</div>
-        </div>
-        <div className="text-4xl text-rearmenia-blue">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.minutes)}</div>
-          <div className="text-xs uppercase text-gray-500">րոպե</div>
-        </div>
-        <div className="text-4xl text-rearmenia-blue">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl font-bold text-rearmenia-blue">{formatTime(timeLeft.seconds)}</div>
-          <div className="text-xs uppercase text-gray-500">վրկ</div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

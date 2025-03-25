@@ -1,7 +1,11 @@
 
 import { useEffect, useState } from "react";
 
-const RegistrationCounter = () => {
+interface RegistrationCounterProps {
+  apiKey: string;
+}
+
+const RegistrationCounter = ({ apiKey }: RegistrationCounterProps) => {
   const [registrations, setRegistrations] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +15,7 @@ const RegistrationCounter = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=AIzaSyDFvN7hVqKb5INnGnZcDgDy9cP-EgqUjmI"
+          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=${apiKey}`
         );
 
         if (!response.ok) {
@@ -25,7 +29,7 @@ const RegistrationCounter = () => {
         setRegistrations(count);
       } catch (err) {
         console.error("Error fetching registrations:", err);
-        setError("Failed to load registration count");
+        setError(err instanceof Error ? err.message : "Unknown error");
         // Fallback to random number between 30-60 if error
         setRegistrations(Math.floor(Math.random() * 30) + 30);
       } finally {
@@ -34,7 +38,7 @@ const RegistrationCounter = () => {
     };
 
     fetchRegistrations();
-  }, []);
+  }, [apiKey]);
 
   return (
     <div className="flex flex-col items-center">
