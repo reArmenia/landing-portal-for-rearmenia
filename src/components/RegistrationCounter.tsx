@@ -14,9 +14,9 @@ const RegistrationCounter = ({ apiKey }: RegistrationCounterProps) => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
-        // Using a properly formatted range that works with the API
+        // Try the simple range format that's more likely to work in all environments
         const response = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A1:A?key=${apiKey}`
+          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=${apiKey}`
         );
 
         if (!response.ok) {
