@@ -21,17 +21,24 @@ const Index = () => {
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
           <img 
-            src="/lovable-uploads/a682db00-a836-4a06-b377-026351a15828.png" 
+            src="/lovable-uploads/1e318780-64c0-4883-b2c3-4b8c7b1c63ce.png" 
             alt="reArmenia Academy Logo" 
             className="h-20 md:h-28 object-contain"
           />
         </div>
       </header>
 
+      {/* Pricing Table Section */}
+      <div className={`py-6 px-4 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="container max-w-md mx-auto">
+          <PricingTable />
+        </div>
+      </div>
+
       {/* Main Content */}
-      <main className="flex-grow flex flex-col justify-center items-center px-4 py-12">
+      <main className="flex-grow flex flex-col justify-center items-center px-4 py-8">
         <div className="container max-w-6xl mx-auto">
-          <div className={`text-center mb-20 transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`text-center mb-16 transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h1 className="text-4xl md:text-6xl font-bold text-rearmenia-blue mb-4">
               «222» ՏԵՔՍՏԱՅԻՆ AI ԿՈՒՐՍ
             </h1>
@@ -47,12 +54,9 @@ const Index = () => {
               <RegistrationCounter apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />
             </div>
             
-            <div className="stats-card flex flex-col">
+            <div className="stats-card">
               <div className="absolute top-0 right-0 w-24 h-24 bg-rearmenia-orange/5 rounded-full -mr-10 -mt-10"></div>
               <PriceDisplay apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />
-              <div className="mt-5">
-                <PricingTable />
-              </div>
             </div>
             
             <div className="stats-card">

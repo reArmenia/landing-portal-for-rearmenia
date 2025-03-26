@@ -18,9 +18,8 @@ const PricingTable = () => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
-        // Fix the sheet range format to include the sheet name correctly
         const response = await fetch(
-          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A1:A1000?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
+          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
         );
 
         if (!response.ok) {
@@ -64,52 +63,59 @@ const PricingTable = () => {
     { id: 4, range: "201+", price: "20,000 AMD" },
   ];
 
-  // For mobile view, we'll render a different layout
-  if (window.innerWidth < 768) {
-    return (
-      <div className="w-full max-w-xs mx-auto mt-4">
-        <h3 className="text-sm font-medium text-rearmenia-blue mb-2 text-center">Գնային աղյուսակ</h3>
-        <div className="space-y-2">
-          {pricingTiers.map((tier) => (
-            <div 
-              key={tier.id} 
-              className={`p-2 rounded-md ${currentTier === tier.id ? 'bg-rearmenia-orange/10 border border-rearmenia-orange/30' : 'bg-gray-50'}`}
-            >
-              <div className="flex justify-between items-center">
-                <div className="text-sm font-medium">{tier.range}</div>
-                <div className={`text-sm ${currentTier === tier.id ? 'font-bold text-rearmenia-orange' : ''}`}>
-                  {tier.price}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full overflow-hidden">
-      <h3 className="text-sm font-medium text-rearmenia-blue mb-2 text-center">Գնային աղյուսակ</h3>
-      <Table className="w-full">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-1/2">Գրանցված քանակ</TableHead>
-            <TableHead className="w-1/2">Արժեք</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {pricingTiers.map((tier) => (
-            <TableRow 
-              key={tier.id}
-              className={currentTier === tier.id ? 'bg-rearmenia-orange/10 border-l-2 border-rearmenia-orange' : ''}
-            >
-              <TableCell className="font-medium">{tier.range}</TableCell>
-              <TableCell className={currentTier === tier.id ? 'font-bold text-rearmenia-orange' : ''}>{tier.price}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <div className="w-full overflow-hidden bg-white rounded-xl shadow-soft p-4">
+      <h3 className="text-lg font-medium text-rearmenia-blue mb-4 text-center">Գնային աղյուսակ</h3>
+      
+      {loading ? (
+        <div className="flex justify-center py-4">
+          <div className="animate-pulse text-center">Բեռնում...</div>
+        </div>
+      ) : (
+        <>
+          {/* Mobile View */}
+          <div className="md:hidden w-full">
+            <div className="space-y-2">
+              {pricingTiers.map((tier) => (
+                <div 
+                  key={tier.id} 
+                  className={`p-3 rounded-md ${currentTier === tier.id ? 'bg-rearmenia-orange/10 border border-rearmenia-orange/30' : 'bg-gray-50'}`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm font-medium">{tier.range}</div>
+                    <div className={`text-sm ${currentTier === tier.id ? 'font-bold text-rearmenia-orange' : ''}`}>
+                      {tier.price}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop View */}
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-1/2">Գրանցված քանակ</TableHead>
+                  <TableHead className="w-1/2">Արժեք</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pricingTiers.map((tier) => (
+                  <TableRow 
+                    key={tier.id}
+                    className={currentTier === tier.id ? 'bg-rearmenia-orange/10 border-l-2 border-rearmenia-orange' : ''}
+                  >
+                    <TableCell className="font-medium">{tier.range}</TableCell>
+                    <TableCell className={currentTier === tier.id ? 'font-bold text-rearmenia-orange' : ''}>{tier.price}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </>
+      )}
     </div>
   );
 };
