@@ -1,14 +1,17 @@
+
 import { useState, useEffect } from "react";
 import CountdownTimer from "../components/CountdownTimer";
 import RegistrationCounter from "../components/RegistrationCounter";
 import PriceDisplay from "../components/PriceDisplay";
 import ContactSection from "../components/ContactSection";
 import PricingTable from "../components/PricingTable";
-import DebugInfo from "../components/DebugInfo";
+import EnhancedCTAButton from "../components/EnhancedCTAButton";
+
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
   const [selectedHeroVariant, setSelectedHeroVariant] = useState(1);
+  const [selectedButtonVariant, setSelectedButtonVariant] = useState<'pulse' | 'bounce' | 'shine' | 'expand' | 'arrow'>('pulse');
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -17,7 +20,9 @@ const Index = () => {
   const getHeroCardClass = () => {
     return "hero-stats-mixed";
   };
-  return <div className="min-h-screen flex flex-col">
+
+  return (
+    <div className="min-h-screen flex flex-col">
       {/* Header with Logo */}
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
@@ -60,20 +65,47 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Debug Info */}
-          {debugMode && <DebugInfo apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />}
-
-          {/* Toggle Debug Mode */}
-          
-
-          {/* CTA Button */}
-          <div className={`text-center mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <a href="https://forms.gle/ch23zZq7kdzxM9Nb7" target="_blank" rel="noopener noreferrer" className="button-primary text-lg md:text-xl font-montserrat font-semibold inline-flex items-center group">
-              Գրանցվում եմ «222» տեքստային AI կուրսին
-              <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
+          {/* CTA Button Variants */}
+          <div className={`text-center space-y-10 mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Button 1: Pulse */}
+            <div className="mb-12">
+              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 1: Թրթռացող</h3>
+              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="pulse">
+                Գրանցվում եմ «222» տեքստային AI կուրսին
+              </EnhancedCTAButton>
+            </div>
+            
+            {/* Button 2: Bounce */}
+            <div className="mb-12">
+              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 2: Ցատկող</h3>
+              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="bounce">
+                Գրանցվում եմ «222» տեքստային AI կուրսին
+              </EnhancedCTAButton>
+            </div>
+            
+            {/* Button 3: Shine */}
+            <div className="mb-12">
+              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 3: Փայլող</h3>
+              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="shine">
+                Գրանցվում եմ «222» տեքստային AI կուրսին
+              </EnhancedCTAButton>
+            </div>
+            
+            {/* Button 4: Expand */}
+            <div className="mb-12">
+              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 4: Ընդլայնվող</h3>
+              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="expand">
+                Գրանցվում եմ «222» տեքստային AI կուրսին
+              </EnhancedCTAButton>
+            </div>
+            
+            {/* Button 5: Arrow */}
+            <div className="mb-12">
+              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 5: Սլաքով</h3>
+              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="arrow">
+                Գրանցվում եմ «222» տեքստային AI կուրսին
+              </EnhancedCTAButton>
+            </div>
           </div>
 
           {/* Contact Section */}
@@ -89,6 +121,8 @@ const Index = () => {
           <p>© {new Date().getFullYear()} reArmenia Academy. Բոլոր իրավունքները պաշտպանված են։</p>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

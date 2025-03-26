@@ -199,4 +199,13 @@
   .hero-value-outline {
     -webkit-text-stroke: 1px rgba(0, 45, 114, 0.3);
   }
+
+  @keyframes shine {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
 }

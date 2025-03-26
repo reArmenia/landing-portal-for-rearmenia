@@ -64,28 +64,28 @@ const CountdownTimer = () => {
       ) : (
         <div className="flex gap-4">
           <div className="flex flex-col items-center">
-            <div className={`text-4xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
+            <div className={`text-2xl md:text-5xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
               {formatTime(timeLeft.days)}
             </div>
             <div className="text-xs uppercase text-gray-500">օր</div>
           </div>
-          <div className={`text-4xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
+          <div className={`text-2xl md:text-5xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
           <div className="flex flex-col items-center">
-            <div className={`text-4xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
+            <div className={`text-2xl md:text-5xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
               {formatTime(timeLeft.hours)}
             </div>
             <div className="text-xs uppercase text-gray-500">ժամ</div>
           </div>
-          <div className={`text-4xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
+          <div className={`text-2xl md:text-5xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
           <div className="flex flex-col items-center">
-            <div className={`text-4xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
+            <div className={`text-2xl md:text-5xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
               {formatTime(timeLeft.minutes)}
             </div>
             <div className="text-xs uppercase text-gray-500">րոպե</div>
           </div>
-          <div className={`text-4xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
+          <div className={`text-2xl md:text-5xl ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>:</div>
           <div className="flex flex-col items-center">
-            <div className={`text-4xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
+            <div className={`text-2xl md:text-5xl font-bold ${isLessThan24Hours ? 'text-red-500' : 'text-rearmenia-blue'}`}>
               {formatTime(timeLeft.seconds)}
             </div>
             <div className="text-xs uppercase text-gray-500">վրկ</div>
