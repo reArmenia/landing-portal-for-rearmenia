@@ -110,6 +110,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Inter var', 'sans-serif'],
+				montserrat: ['Montserrat', 'sans-serif'],
 				heading: ['Montserrat', 'sans-serif']
 			},
 			boxShadow: {
