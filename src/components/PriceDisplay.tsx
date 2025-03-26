@@ -14,8 +14,9 @@ const PriceDisplay = ({ apiKey }: PriceDisplayProps) => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
+        // Fix the sheet range format to include the sheet name correctly
         const response = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=${apiKey}`
+          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A1:A1000?key=${apiKey}`
         );
 
         if (!response.ok) {

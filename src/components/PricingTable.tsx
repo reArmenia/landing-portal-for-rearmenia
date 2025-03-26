@@ -18,8 +18,9 @@ const PricingTable = () => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
+        // Fix the sheet range format to include the sheet name correctly
         const response = await fetch(
-          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
+          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A1:A1000?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
         );
 
         if (!response.ok) {
