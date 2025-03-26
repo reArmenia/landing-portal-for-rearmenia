@@ -9,7 +9,7 @@ interface TimeLeft {
 }
 
 const CountdownTimer = () => {
-  const targetDate = new Date("2024-04-04T23:59:59");
+  const targetDate = new Date("2025-04-04T23:59:59");
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -48,7 +48,7 @@ const CountdownTimer = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="text-lg text-rearmenia-blue mb-2">Վերջնաժամկետ՝ ապրիլի 4</div>
+      <div className="text-lg text-rearmenia-blue mb-2">Վերջնաժամկետ՝ ապրիլի 4, 2025</div>
       {isExpired ? (
         <div className="text-4xl font-bold text-rearmenia-blue">Ավարտված է</div>
       ) : (

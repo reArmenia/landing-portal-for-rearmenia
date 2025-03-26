@@ -10,10 +10,23 @@ import DebugInfo from "../components/DebugInfo";
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
+  const [selectedHeroVariant, setSelectedHeroVariant] = useState(1);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  // Hero section styling variants
+  const getHeroCardClass = (index: number) => {
+    switch(index) {
+      case 0: return "hero-stats-v1";
+      case 1: return "hero-stats-v2";
+      case 2: return "hero-stats-v3";
+      case 3: return "hero-stats-v4";
+      case 4: return "hero-stats-v5";
+      default: return "hero-stats-v1";
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -21,7 +34,7 @@ const Index = () => {
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
           <img 
-            src="/lovable-uploads/1e318780-64c0-4883-b2c3-4b8c7b1c63ce.png" 
+            src="/lovable-uploads/a682db00-a836-4a06-b377-026351a15828.png" 
             alt="reArmenia Academy Logo" 
             className="h-20 md:h-28 object-contain"
           />
@@ -45,19 +58,31 @@ const Index = () => {
             <PricingTable variant="grid" />
           </div>
 
-          {/* Stats Cards */}
+          {/* Hero Variant Selector */}
+          <div className="flex justify-center gap-2 mb-6">
+            {[1, 2, 3, 4, 5].map((variant) => (
+              <button 
+                key={variant}
+                onClick={() => setSelectedHeroVariant(variant)}
+                className={`w-8 h-8 rounded-full border ${selectedHeroVariant === variant ? 'bg-rearmenia-blue border-rearmenia-orange' : 'bg-gray-100 border-gray-300'}`}
+                aria-label={`Hero Style ${variant}`}
+              />
+            ))}
+          </div>
+
+          {/* Stats Cards - Hero Section */}
           <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-16 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="stats-card">
+            <div className={getHeroCardClass(selectedHeroVariant - 1)}>
               <div className="absolute top-0 right-0 w-24 h-24 bg-rearmenia-blue/5 rounded-full -mr-10 -mt-10"></div>
               <RegistrationCounter apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />
             </div>
             
-            <div className="stats-card">
+            <div className={getHeroCardClass(selectedHeroVariant - 1)}>
               <div className="absolute top-0 right-0 w-24 h-24 bg-rearmenia-orange/5 rounded-full -mr-10 -mt-10"></div>
               <PriceDisplay apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />
             </div>
             
-            <div className="stats-card">
+            <div className={getHeroCardClass(selectedHeroVariant - 1)}>
               <div className="absolute top-0 right-0 w-24 h-24 bg-rearmenia-blue/5 rounded-full -mr-10 -mt-10"></div>
               <CountdownTimer />
             </div>

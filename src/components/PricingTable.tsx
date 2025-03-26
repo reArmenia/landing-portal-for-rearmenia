@@ -29,7 +29,7 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
+          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Academy 222 AI Course Form (Responses)!A:A?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
         );
 
         if (!response.ok) {
@@ -68,7 +68,9 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
   // Only implementing the Grid variant with Montserrat Arm Semibold font
   const renderTableGrid = () => (
     <div className="w-full p-4">
-      <h3 className="text-lg font-montserrat font-semibold text-rearmenia-blue mb-6 text-center">Գնային աղյուսակ</h3>
+      <h3 className="text-lg font-montserrat font-semibold text-rearmenia-blue mb-6 text-center">
+        Արժեքը կախված է մասնակիցների քանակից՝ {loading ? "..." : registrations}
+      </h3>
       
       {loading ? (
         <div className="flex justify-center py-4">

@@ -15,7 +15,7 @@ const PriceDisplay = ({ apiKey }: PriceDisplayProps) => {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=${apiKey}`
+          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Academy 222 AI Course Form (Responses)!A:A?key=${apiKey}`
         );
 
         if (!response.ok) {
