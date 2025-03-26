@@ -20,7 +20,7 @@ const ContactSection = () => {
           </div>
           <div className="min-w-0">
             <div className="text-sm text-gray-500">Էլ․ հասցե</div>
-            <a href="mailto:ani.hovhannisyan@rearmenia.com" className="text-xs md:font-small hover:text-rearmenia-orange transition-colors truncate block overflow-hidden text-ellipsis">
+            <a href="mailto:ani.hovhannisyan@rearmenia.com" className="text-xs md:text-md md:font-small hover:text-rearmenia-orange transition-colors truncate block overflow-hidden text-ellipsis">
               ani.hovhannisyan@rearmenia.com
             </a>
           </div>
