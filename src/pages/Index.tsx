@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import CountdownTimer from "../components/CountdownTimer";
 import RegistrationCounter from "../components/RegistrationCounter";
@@ -6,10 +5,8 @@ import PriceDisplay from "../components/PriceDisplay";
 import ContactSection from "../components/ContactSection";
 import PricingTable from "../components/PricingTable";
 import EnhancedCTAButton from "../components/EnhancedCTAButton";
-
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -18,9 +15,7 @@ const Index = () => {
   const getHeroCardClass = () => {
     return "hero-stats-mixed";
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       {/* Header with Logo */}
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
@@ -30,7 +25,7 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="flex-grow flex flex-col justify-center items-center px-4 py-8">
-        <div className="container max-w-6xl mx-auto">
+        <div className="container max-w-6xl mx-auto px-0">
           <div className={`text-center mb-8 transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h1 className="text-4xl md:text-6xl font-montserrat font-semibold text-rearmenia-blue mb-4">
               «222» ՏԵՔՍՏԱՅԻՆ AI ԿՈՒՐՍ
@@ -83,8 +78,6 @@ const Index = () => {
           <p>© {new Date().getFullYear()} reArmenia Academy. Բոլոր իրավունքները պաշտպանված են։</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

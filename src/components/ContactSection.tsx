@@ -1,6 +1,6 @@
 import { Mail, Phone, User } from "lucide-react";
 const ContactSection = () => {
-  return <div className="glass-panel rounded-2xl p-8 w-full max-w-md mx-auto animate-fade-in">
+  return <div className="glass-panel rounded-2xl p-8 w-full mx-auto animate-fade-in">
       <h3 className="text-2xl font-bold text-rearmenia-blue mb-6 text-center">Կապ մեզ հետ</h3>
       
       <div className="space-y-4">
