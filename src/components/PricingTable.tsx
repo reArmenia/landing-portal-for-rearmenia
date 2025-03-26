@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { X, Check, TrendingUp } from "lucide-react";
 
 // Base pricing tiers data
 const pricingTiersData = [{
@@ -96,52 +95,76 @@ const PricingTable = ({
 
   // Responsive grid layout with column on mobile
   const renderTableGrid = () => (
-    <div className="w-full p-4">
-      <h3 className="text-lg font-montserrat font-semibold text-rearmenia-blue mb-6 text-center">
+    <div className="w-full backdrop-blur-sm bg-white/10 p-8 rounded-3xl border border-white/20 shadow-xl">
+      <h3 className="text-xl font-montserrat font-bold text-rearmenia-blue mb-8 text-center flex items-center justify-center gap-2">
         {loading 
           ? "Բեռնում..." 
-          : `Արժեքը կախված է մասնակիցների քանակից՝ ${paidCount} վճարված`}
+          : (
+            <>
+              <TrendingUp className="h-5 w-5 text-rearmenia-orange" />
+              <span>Արժեքը կախված է մասնակիցների քանակից՝</span>
+              <span className="bg-gradient-to-r from-rearmenia-blue to-rearmenia-orange bg-clip-text text-transparent font-extrabold">
+                {paidCount} վճարված
+              </span>
+            </>
+          )}
       </h3>
       
       {loading ? (
-        <div className="flex justify-center py-4">
-          <div className="animate-pulse text-center font-montserrat">Բեռնում...</div>
+        <div className="flex justify-center py-8">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="h-12 w-12 rounded-full bg-rearmenia-blue/30 animate-spin mb-4"></div>
+            <div className="text-rearmenia-blue font-medium">Բեռնում...</div>
+          </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {pricingTiersData.map(tier => {
             const isTierInactive = tier.id < currentTier;
+            const isCurrentTier = currentTier === tier.id;
+            
             return (
               <div
                 key={tier.id}
-                className={`relative flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
-                  currentTier === tier.id
-                    ? 'bg-rearmenia-blue text-white ring-2 ring-rearmenia-orange ring-offset-2'
+                className={`relative overflow-hidden rounded-xl p-6 transition-all duration-300 ${
+                  isCurrentTier
+                    ? 'bg-gradient-to-br from-rearmenia-blue/90 to-rearmenia-blue/70 text-white shadow-lg transform scale-105'
                     : isTierInactive
-                    ? 'bg-gray-100 opacity-75'
-                    : 'bg-gray-50 hover:bg-gray-100'
+                    ? 'bg-gray-100/70 opacity-75'
+                    : 'bg-white/80 hover:bg-white/90 hover:shadow-md'
                 }`}
               >
-                {isTierInactive && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <X className="text-red-500 h-24 w-24 opacity-80" />
+                {isCurrentTier && (
+                  <div className="absolute top-0 right-0 bg-rearmenia-orange text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    Ընթացիկ
                   </div>
                 )}
-                <div
-                  className={`text-lg font-montserrat font-semibold mb-2 ${isTierInactive ? 'opacity-50' : ''}`}
-                >
-                  {tier.range}
-                </div>
-                <div
-                  className={`text-xl font-montserrat font-semibold ${
-                    currentTier === tier.id
+                
+                {isTierInactive && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200/50 backdrop-blur-sm">
+                    <X className="text-red-500 h-16 w-16 opacity-80" />
+                  </div>
+                )}
+                
+                <div className={`text-center ${isTierInactive ? 'opacity-50' : ''}`}>
+                  <div className={`text-xl font-montserrat font-bold mb-3 ${isCurrentTier ? 'text-white' : 'text-rearmenia-blue'}`}>
+                    {tier.range}
+                  </div>
+                  <div className={`text-2xl font-montserrat font-extrabold ${
+                    isCurrentTier
                       ? 'text-rearmenia-orange'
                       : isTierInactive
                       ? 'text-gray-400'
                       : 'text-rearmenia-blue'
-                  }`}
-                >
-                  {tier.price}
+                  }`}>
+                    {tier.price}
+                  </div>
+                  
+                  {isCurrentTier && (
+                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+                      <Check className="h-6 w-6 text-rearmenia-orange drop-shadow-md" />
+                    </div>
+                  )}
                 </div>
               </div>
             );
