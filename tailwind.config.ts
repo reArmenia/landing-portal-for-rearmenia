@@ -98,6 +98,16 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-10px)' }
+				},
+				'wiggle': {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'25%': { transform: 'rotate(-3deg)' },
+					'75%': { transform: 'rotate(3deg)' }
+				},
+				'gradient-shift': {
+					'0%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
+					'100%': { backgroundPosition: '0% 50%' }
 				}
 			},
 			animation: {
@@ -106,12 +116,16 @@ export default {
 				'fade-in': 'fade-in 0.7s ease-out',
 				'slide-in': 'slide-in 0.7s ease-out',
 				'pulse-subtle': 'pulse-subtle 3s infinite ease-in-out',
-				'float': 'float 6s infinite ease-in-out'
+				'float': 'float 6s infinite ease-in-out',
+				'gradient-shift': 'gradient-shift 3s ease infinite'
 			},
 			fontFamily: {
 				sans: ['Inter var', 'sans-serif'],
 				montserrat: ['Montserrat', 'sans-serif'],
 				heading: ['Montserrat', 'sans-serif']
+			},
+			backgroundSize: {
+				'size-200': '200% 200%',
 			},
 			boxShadow: {
 				'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',

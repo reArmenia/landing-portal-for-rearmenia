@@ -1,14 +1,18 @@
+
 import { useState, useEffect } from "react";
 import CountdownTimer from "../components/CountdownTimer";
 import RegistrationCounter from "../components/RegistrationCounter";
 import PriceDisplay from "../components/PriceDisplay";
 import ContactSection from "../components/ContactSection";
 import PricingTable from "../components/PricingTable";
-import DebugInfo from "../components/DebugInfo";
+import EnhancedCTAButton from "../components/EnhancedCTAButton";
+
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [selectedHeroVariant, setSelectedHeroVariant] = useState(1);
+  const [activeCTAVariant, setActiveCTAVariant] = useState<'pulse' | 'shake' | 'float' | 'glow' | 'gradient'>('pulse');
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -17,11 +21,12 @@ const Index = () => {
   const getHeroCardClass = () => {
     return "hero-stats-mixed";
   };
+
   return <div className="min-h-screen flex flex-col">
       {/* Header with Logo */}
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
-          <img src="/lovable-uploads/919e7881-6e0b-4bb9-9eea-d4aa9a9a7d55.png" alt="reArmenia Academy Logo" className="h-20 md:h-28 object-contain" />
+          <img src="/lovable-uploads/a682db00-a836-4a06-b377-026351a15828.png" alt="reArmenia Academy Logo" className="h-20 md:h-28 object-contain" />
         </div>
       </header>
 
@@ -60,20 +65,49 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Debug Info */}
-          {debugMode && <DebugInfo apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />}
-
-          {/* Toggle Debug Mode */}
-          
-
-          {/* CTA Button */}
+          {/* CTA Button Variations */}
           <div className={`text-center mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <a href="https://forms.gle/ch23zZq7kdzxM9Nb7" target="_blank" rel="noopener noreferrer" className="button-primary text-lg md:text-xl font-montserrat font-semibold inline-flex items-center group">
-              Գրանցվում եմ «222» տեքստային AI կուրսին
-              <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
+            <div className="mb-8">
+              <EnhancedCTAButton 
+                text="Գրանցվում եմ «222» տեքստային AI կուրսին" 
+                href="https://forms.gle/ch23zZq7kdzxM9Nb7"
+                variant={activeCTAVariant}
+              />
+            </div>
+            
+            {/* CTA Variant Selector - Comment or remove this section in production */}
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              <button 
+                onClick={() => setActiveCTAVariant('pulse')} 
+                className={`px-3 py-1 text-xs rounded ${activeCTAVariant === 'pulse' ? 'bg-rearmenia-blue text-white' : 'bg-gray-100'}`}
+              >
+                Pulse
+              </button>
+              <button 
+                onClick={() => setActiveCTAVariant('shake')} 
+                className={`px-3 py-1 text-xs rounded ${activeCTAVariant === 'shake' ? 'bg-rearmenia-blue text-white' : 'bg-gray-100'}`}
+              >
+                Shake
+              </button>
+              <button 
+                onClick={() => setActiveCTAVariant('float')} 
+                className={`px-3 py-1 text-xs rounded ${activeCTAVariant === 'float' ? 'bg-rearmenia-blue text-white' : 'bg-gray-100'}`}
+              >
+                Float
+              </button>
+              <button 
+                onClick={() => setActiveCTAVariant('glow')} 
+                className={`px-3 py-1 text-xs rounded ${activeCTAVariant === 'glow' ? 'bg-rearmenia-blue text-white' : 'bg-gray-100'}`}
+              >
+                Glow
+              </button>
+              <button 
+                onClick={() => setActiveCTAVariant('gradient')} 
+                className={`px-3 py-1 text-xs rounded ${activeCTAVariant === 'gradient' ? 'bg-rearmenia-blue text-white' : 'bg-gray-100'}`}
+              >
+                Gradient
+              </button>
+            </div>
           </div>
 
           {/* Contact Section */}
