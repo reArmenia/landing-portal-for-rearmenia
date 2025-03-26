@@ -1,9 +1,6 @@
-
 import { Mail, Phone, User } from "lucide-react";
-
 const ContactSection = () => {
-  return (
-    <div className="glass-panel rounded-2xl p-8 w-full max-w-md mx-auto animate-fade-in">
+  return <div className="glass-panel rounded-2xl p-8 w-full max-w-md mx-auto animate-fade-in">
       <h3 className="text-2xl font-bold text-rearmenia-blue mb-6 text-center">Կապ մեզ հետ</h3>
       
       <div className="space-y-4">
@@ -23,10 +20,7 @@ const ContactSection = () => {
           </div>
           <div className="min-w-0">
             <div className="text-sm text-gray-500">Էլ․ հասցե</div>
-            <a 
-              href="mailto:ani.hovhannisyan@rearmenia.com" 
-              className="font-medium hover:text-rearmenia-orange transition-colors truncate block overflow-hidden text-ellipsis"
-            >
+            <a href="mailto:ani.hovhannisyan@rearmenia.com" className="font-small hover:text-rearmenia-orange transition-colors truncate block overflow-hidden text-ellipsis">
               ani.hovhannisyan@rearmenia.com
             </a>
           </div>
@@ -38,17 +32,12 @@ const ContactSection = () => {
           </div>
           <div className="min-w-0">
             <div className="text-sm text-gray-500">Հեռախոսահամար</div>
-            <a 
-              href="tel:+37495565989" 
-              className="font-medium hover:text-rearmenia-orange transition-colors truncate"
-            >
+            <a href="tel:+37495565989" className="font-medium hover:text-rearmenia-orange transition-colors truncate">
               +374 95 565989
             </a>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ContactSection;
