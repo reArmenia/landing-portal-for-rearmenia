@@ -78,14 +78,14 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
           <div className="animate-pulse text-center font-montserrat">Բեռնում...</div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 auto-rows-auto">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {pricingTiersData.map((tier) => {
             const isTierInactive = tier.id < currentTier;
             
             return (
               <div 
                 key={tier.id} 
-                className={`relative aspect-square flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
+                className={`relative flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
                   currentTier === tier.id 
                     ? 'bg-rearmenia-blue text-white ring-2 ring-rearmenia-orange ring-offset-2' 
                     : isTierInactive
@@ -95,7 +95,7 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
               >
                 {isTierInactive && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <X className="text-red-500 h-12 w-12 opacity-80" />
+                    <X className="text-red-500 h-24 w-24 opacity-80" />
                   </div>
                 )}
                 <div className={`text-lg font-montserrat font-semibold mb-2 ${isTierInactive ? 'opacity-50' : ''}`}>
