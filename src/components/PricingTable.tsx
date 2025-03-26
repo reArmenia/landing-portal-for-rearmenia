@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { X } from "lucide-react";
 import { 
   Card,
   CardContent,
@@ -77,22 +78,41 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
           <div className="animate-pulse text-center font-montserrat">Բեռնում...</div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {pricingTiersData.map((tier) => (
-            <div 
-              key={tier.id} 
-              className={`aspect-square flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
-                currentTier === tier.id 
-                  ? 'bg-rearmenia-blue text-white ring-2 ring-rearmenia-orange ring-offset-2' 
-                  : 'bg-gray-50 hover:bg-gray-100'
-              }`}
-            >
-              <div className="text-lg font-montserrat font-semibold mb-2">{tier.range}</div>
-              <div className={`text-xl font-montserrat font-semibold ${currentTier === tier.id ? 'text-rearmenia-orange' : 'text-rearmenia-blue'}`}>
-                {tier.price}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 auto-rows-auto">
+          {pricingTiersData.map((tier) => {
+            const isTierInactive = tier.id < currentTier;
+            
+            return (
+              <div 
+                key={tier.id} 
+                className={`relative aspect-square flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
+                  currentTier === tier.id 
+                    ? 'bg-rearmenia-blue text-white ring-2 ring-rearmenia-orange ring-offset-2' 
+                    : isTierInactive
+                      ? 'bg-gray-100 opacity-75'
+                      : 'bg-gray-50 hover:bg-gray-100'
+                }`}
+              >
+                {isTierInactive && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <X className="text-red-500 h-12 w-12 opacity-80" />
+                  </div>
+                )}
+                <div className={`text-lg font-montserrat font-semibold mb-2 ${isTierInactive ? 'opacity-50' : ''}`}>
+                  {tier.range}
+                </div>
+                <div className={`text-xl font-montserrat font-semibold ${
+                  currentTier === tier.id 
+                    ? 'text-rearmenia-orange' 
+                    : isTierInactive 
+                      ? 'text-gray-400' 
+                      : 'text-rearmenia-blue'
+                }`}>
+                  {tier.price}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
