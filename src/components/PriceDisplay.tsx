@@ -1,17 +1,13 @@
-
 import { useEffect, useState } from "react";
-
 interface PriceDisplayProps {
   apiKey: string;
 }
-
 const PriceDisplay = ({
   apiKey
 }: PriceDisplayProps) => {
   const [registrations, setRegistrations] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchRegistrations = async () => {
       try {
@@ -36,33 +32,16 @@ const PriceDisplay = ({
     };
     fetchRegistrations();
   }, [apiKey]);
-
   const getPrice = (): string => {
     if (registrations >= 200) return "20,000 AMD";
     if (registrations >= 100) return "30,000 AMD";
     if (registrations >= 50) return "40,000 AMD";
     return "50,000 AMD";
   };
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="text-lg text-rearmenia-blue mb-4 font-medium">Արժեք</div>
-      {loading ? (
-        <div className="h-16 w-40 bg-rearmenia-orange/10 rounded-lg animate-pulse flex items-center justify-center">
-          <div className="w-6 h-6 border-4 border-rearmenia-orange/30 border-t-rearmenia-orange rounded-full animate-spin"></div>
-        </div>
-      ) : (
-        <div className="text-2xl md:text-5xl font-extrabold bg-gradient-to-r from-rearmenia-orange to-rearmenia-orange/80 bg-clip-text text-transparent animate-fade-in">
-          {getPrice()}
-        </div>
-      )}
-      {error && (
-        <div className="text-xs text-red-500 mt-2 p-1 rounded bg-red-50">
-          {error}
-        </div>
-      )}
-    </div>
-  );
+  return <div className="flex flex-col items-center">
+      <div className="text-lg text-rearmenia-blue mb-2">Արժեք</div>
+      {loading ? <div className="text-5xl font-bold text-rearmenia-orange animate-pulse">...</div> : <div className="text-2xl md:text-5xl font-bold text-rearmenia-orange animate-fade-in">{getPrice()}</div>}
+      {error && <div className="text-xs text-red-500 mt-2">{error}</div>}
+    </div>;
 };
-
 export default PriceDisplay;

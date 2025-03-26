@@ -1,17 +1,13 @@
-
 import { useEffect, useState } from "react";
-
 interface RegistrationCounterProps {
   apiKey: string;
 }
-
 const RegistrationCounter = ({
   apiKey
 }: RegistrationCounterProps) => {
   const [registrations, setRegistrations] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchRegistrations = async () => {
       try {
@@ -38,27 +34,9 @@ const RegistrationCounter = ({
     };
     fetchRegistrations();
   }, [apiKey]);
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="text-lg text-rearmenia-blue mb-4 font-medium">Գրանցում</div>
-      {loading ? (
-        <div className="h-16 w-24 bg-rearmenia-blue/10 rounded-lg animate-pulse flex items-center justify-center">
-          <div className="w-6 h-6 border-4 border-rearmenia-blue/30 border-t-rearmenia-blue rounded-full animate-spin"></div>
-        </div>
-      ) : (
-        <div className="text-2xl md:text-5xl font-extrabold bg-gradient-to-r from-rearmenia-blue to-rearmenia-blue/80 bg-clip-text text-transparent animate-fade-in relative">
-          <span className="relative">{registrations}</span>
-          <span className="absolute -inset-3 bg-rearmenia-blue/5 blur-xl opacity-70 rounded-full -z-10"></span>
-        </div>
-      )}
-      {error && (
-        <div className="text-xs text-red-500 mt-2 p-1 rounded bg-red-50">
-          {error}
-        </div>
-      )}
-    </div>
-  );
+  return <div className="flex flex-col items-center">
+      <div className="text-lg text-rearmenia-blue mb-2">Գրանցում</div>
+      {loading ? <div className="text-5xl font-bold text-rearmenia-blue animate-pulse">...</div> : error ? <div className="text-5xl font-bold text-rearmenia-blue">{registrations}</div> : <div className="text-2xl md:text-5xl font-bold text-rearmenia-blue animate-fade-in">{registrations}</div>}
+    </div>;
 };
-
 export default RegistrationCounter;
