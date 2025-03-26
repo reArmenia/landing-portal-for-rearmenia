@@ -14,13 +14,13 @@ const RegistrationCounter = ({ apiKey }: RegistrationCounterProps) => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
-        // Use "A:A" range format instead of "A1:A1000"
+        // Using a properly formatted range that works with the API
         const response = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A:A?key=${apiKey}`
+          `https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Sheet1!A1:A?key=${apiKey}`
         );
 
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
@@ -28,6 +28,7 @@ const RegistrationCounter = ({ apiKey }: RegistrationCounterProps) => {
         // Count rows minus header row
         const count = data.values ? Math.max(0, data.values.length - 1) : 0;
         setRegistrations(count);
+        console.log("Registration data fetched successfully:", count);
       } catch (err) {
         console.error("Error fetching registrations:", err);
         setError(err instanceof Error ? err.message : "Unknown error");
