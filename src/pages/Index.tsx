@@ -9,14 +9,12 @@ import EnhancedCTAButton from "../components/EnhancedCTAButton";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [selectedHeroVariant, setSelectedHeroVariant] = useState(1);
-  const [selectedButtonVariant, setSelectedButtonVariant] = useState<'pulse' | 'bounce' | 'shine' | 'expand' | 'arrow'>('pulse');
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  // Hero section styling variants - Mixing variant 1 (scale) and 4 (border glow)
+  // Hero section styling variants
   const getHeroCardClass = () => {
     return "hero-stats-mixed";
   };
@@ -42,12 +40,12 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Pricing Table Section - Only Grid variant */}
+          {/* Pricing Table Section */}
           <div className={`mb-12 transition-all duration-700 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <PricingTable variant="grid" />
           </div>
 
-          {/* Stats Cards - Hero Section - Changed to Column Layout */}
+          {/* Stats Cards - Hero Section */}
           <div className={`flex flex-col gap-6 max-w-md mx-auto mb-16 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className={getHeroCardClass()}>
               <div className="absolute top-0 right-0 w-24 h-24 bg-rearmenia-blue/5 rounded-full -mr-10 -mt-10"></div>
@@ -65,47 +63,11 @@ const Index = () => {
             </div>
           </div>
 
-          {/* CTA Button Variants */}
-          <div className={`text-center space-y-10 mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Button 1: Pulse */}
-            <div className="mb-12">
-              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 1: Թրթռացող</h3>
-              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="pulse">
-                Գրանցվում եմ «222» տեքստային AI կուրսին
-              </EnhancedCTAButton>
-            </div>
-            
-            {/* Button 2: Bounce */}
-            <div className="mb-12">
-              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 2: Ցատկող</h3>
-              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="bounce">
-                Գրանցվում եմ «222» տեքստային AI կուրսին
-              </EnhancedCTAButton>
-            </div>
-            
-            {/* Button 3: Shine */}
-            <div className="mb-12">
-              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 3: Փայլող</h3>
-              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="shine">
-                Գրանցվում եմ «222» տեքստային AI կուրսին
-              </EnhancedCTAButton>
-            </div>
-            
-            {/* Button 4: Expand */}
-            <div className="mb-12">
-              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 4: Ընդլայնվող</h3>
-              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="expand">
-                Գրանցվում եմ «222» տեքստային AI կուրսին
-              </EnhancedCTAButton>
-            </div>
-            
-            {/* Button 5: Arrow */}
-            <div className="mb-12">
-              <h3 className="text-xl font-montserrat font-semibold text-rearmenia-blue mb-4">Տարբերակ 5: Սլաքով</h3>
-              <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7" variant="arrow">
-                Գրանցվում եմ «222» տեքստային AI կուրսին
-              </EnhancedCTAButton>
-            </div>
+          {/* Single CTA Button with Shine Effect */}
+          <div className={`text-center mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <EnhancedCTAButton href="https://forms.gle/ch23zZq7kdzxM9Nb7">
+              Գրանցվում եմ «222» տեքստային AI կուրսին
+            </EnhancedCTAButton>
           </div>
 
           {/* Contact Section */}

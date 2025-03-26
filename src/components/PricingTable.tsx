@@ -68,10 +68,10 @@ const PricingTable = ({
         
         setPaidCount(nonEmptyCount);
 
-        // Set current tier based on registration count
-        if (count >= 200) setCurrentTier(4);
-        else if (count >= 100) setCurrentTier(3);
-        else if (count >= 50) setCurrentTier(2);
+        // Set current tier based on PAID registration count instead of total registrations
+        if (nonEmptyCount >= 200) setCurrentTier(4);
+        else if (nonEmptyCount >= 100) setCurrentTier(3);
+        else if (nonEmptyCount >= 50) setCurrentTier(2);
         else setCurrentTier(1);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -80,9 +80,11 @@ const PricingTable = ({
         setRegistrations(fallbackCount);
         setPaidCount(Math.floor(fallbackCount * 0.7)); // Assume ~70% paid as fallback
         
-        if (fallbackCount >= 200) setCurrentTier(4);
-        else if (fallbackCount >= 100) setCurrentTier(3);
-        else if (fallbackCount >= 50) setCurrentTier(2);
+        // Set tier based on the fallback paid count
+        const fallbackPaidCount = Math.floor(fallbackCount * 0.7);
+        if (fallbackPaidCount >= 200) setCurrentTier(4);
+        else if (fallbackPaidCount >= 100) setCurrentTier(3);
+        else if (fallbackPaidCount >= 50) setCurrentTier(2);
         else setCurrentTier(1);
       } finally {
         setLoading(false);
