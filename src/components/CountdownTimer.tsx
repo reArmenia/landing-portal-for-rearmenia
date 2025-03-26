@@ -9,7 +9,6 @@ interface TimeLeft {
 }
 
 const CountdownTimer = () => {
-  const targetDate = new Date("2025-04-04T23:59:59");
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -20,7 +19,8 @@ const CountdownTimer = () => {
   const [isLessThan24Hours, setIsLessThan24Hours] = useState<boolean>(false);
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
+  const targetDate = new Date("2025-04-04T23:59:59");
+  const calculateTimeLeft = () => {
       const difference = +targetDate - +new Date();
       
       if (difference > 0) {
@@ -48,7 +48,7 @@ const CountdownTimer = () => {
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, []);
 
   const formatTime = (value: number): string => {
     return value.toString().padStart(2, '0');

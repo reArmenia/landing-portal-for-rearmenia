@@ -19,7 +19,7 @@ const Index = () => {
       {/* Header with Logo */}
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
-          <img src="/lovable-uploads/919e7881-6e0b-4bb9-9eea-d4aa9a9a7d55.png" alt="reArmenia Academy Logo" className="h-20 md:h-28 object-contain" />
+          <img src="/imgs/919e7881-6e0b-4bb9-9eea-d4aa9a9a7d55.png" alt="reArmenia Academy Logo" className="h-20 md:h-28 object-contain" />
         </div>
       </header>
 
