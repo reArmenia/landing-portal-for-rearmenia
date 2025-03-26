@@ -113,6 +113,34 @@
     0%, 100% { box-shadow: 0 0 5px rgba(237, 139, 0, 0.3); }
     50% { box-shadow: 0 0 15px rgba(237, 139, 0, 0.6); }
   }
+  
+  /* CTA Button Animations */
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes subtle-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(237, 139, 0, 0.5), 0 0 10px rgba(237, 139, 0, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(237, 139, 0, 0.7), 0 0 20px rgba(237, 139, 0, 0.4); }
+  }
+  
+  @keyframes float-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
 }
 
 @layer base {
@@ -169,8 +197,18 @@
     animation: scale-bounce 6s infinite ease-in-out, border-glow 3s infinite ease-in-out;
   }
   
-  .button-primary {
-    @apply bg-rearmenia-orange text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-button hover:translate-y-[-2px] active:translate-y-[0px];
+  /* Enhanced CTA button with animation */
+  .pulsing-cta-button {
+    @apply bg-rearmenia-orange text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 relative hover:translate-y-[-2px] active:translate-y-[0px];
+    animation: pulse-scale 2s infinite ease-in-out, glow-pulse 3s infinite ease-in-out;
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+  }
+  
+  .pulsing-cta-button:hover {
+    animation: pulse-scale 1s infinite ease-in-out, glow-pulse 1.5s infinite ease-in-out, gradient-shift 3s infinite;
+    background: linear-gradient(90deg, #ed8b00, #f09c33, #ed8b00);
+    background-size: 200% 100%;
   }
   
   .glass-panel {

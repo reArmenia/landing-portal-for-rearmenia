@@ -24,23 +24,25 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
   const [registrations, setRegistrations] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentTier, setCurrentTier] = useState<number>(1);
+  const [description, setDescription] = useState<string>("");
   
   useEffect(() => {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
+        // Fetch registrations count from column A
+        const responseA = await fetch(
           "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Academy 222 AI Course Form (Responses)!A:A?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
         );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+        if (!responseA.ok) {
+          throw new Error("Failed to fetch data from column A");
         }
 
-        const data = await response.json();
+        const dataA = await responseA.json();
         
         // Count rows minus header row
-        const count = data.values ? Math.max(0, data.values.length - 1) : 0;
+        const count = dataA.values ? Math.max(0, dataA.values.length - 1) : 0;
         setRegistrations(count);
         
         // Set current tier based on registration count
@@ -48,11 +50,38 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
         else if (count >= 100) setCurrentTier(3);
         else if (count >= 50) setCurrentTier(2);
         else setCurrentTier(1);
+        
+        // Fetch description from column H - first non-empty value
+        const responseH = await fetch(
+          "https://sheets.googleapis.com/v4/spreadsheets/1gaAjL7KoNmjfF0RnyyJM5BM-y-h2J7ixl44Lsws_vMw/values/Academy 222 AI Course Form (Responses)!H:H?key=AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc"
+        );
+        
+        if (!responseH.ok) {
+          throw new Error("Failed to fetch data from column H");
+        }
+        
+        const dataH = await responseH.json();
+        
+        // Find first non-empty value in column H after header
+        let descriptionText = "";
+        if (dataH.values && dataH.values.length > 1) {
+          for (let i = 1; i < dataH.values.length; i++) {
+            if (dataH.values[i] && dataH.values[i][0] && dataH.values[i][0].trim() !== "") {
+              descriptionText = dataH.values[i][0];
+              break;
+            }
+          }
+        }
+        
+        // If no description found, use default
+        setDescription(descriptionText || `Արժեքը կախված է մասնակիցների քանակից՝ ${count}`);
+        
       } catch (err) {
-        console.error("Error fetching registrations:", err);
+        console.error("Error fetching data:", err);
         // Fallback to random number between 30-60 if error
         const fallbackCount = Math.floor(Math.random() * 30) + 30;
         setRegistrations(fallbackCount);
+        setDescription(`Արժեքը կախված է մասնակիցների քանակից՝ ${fallbackCount}`);
         
         if (fallbackCount >= 200) setCurrentTier(4);
         else if (fallbackCount >= 100) setCurrentTier(3);
@@ -70,7 +99,7 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
   const renderTableGrid = () => (
     <div className="w-full p-4">
       <h3 className="text-lg font-montserrat font-semibold text-rearmenia-blue mb-6 text-center">
-        Արժեքը կախված է մասնակիցների քանակից՝ {loading ? "..." : registrations}
+        {loading ? "Բեռնում..." : description}
       </h3>
       
       {loading ? (
@@ -78,7 +107,7 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
           <div className="animate-pulse text-center font-montserrat">Բեռնում...</div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {pricingTiersData.map((tier) => {
             const isTierInactive = tier.id < currentTier;
             
@@ -95,7 +124,7 @@ const PricingTable = ({ variant = 'grid' }: PricingTableProps) => {
               >
                 {isTierInactive && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <X className="text-red-500 h-24 w-24 opacity-80" />
+                    <X className="text-red-500 h-48 w-48 opacity-80" />
                   </div>
                 )}
                 <div className={`text-lg font-montserrat font-semibold mb-2 ${isTierInactive ? 'opacity-50' : ''}`}>

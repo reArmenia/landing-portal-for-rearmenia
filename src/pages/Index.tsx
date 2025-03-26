@@ -5,11 +5,9 @@ import RegistrationCounter from "../components/RegistrationCounter";
 import PriceDisplay from "../components/PriceDisplay";
 import ContactSection from "../components/ContactSection";
 import PricingTable from "../components/PricingTable";
-import DebugInfo from "../components/DebugInfo";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
   const [selectedHeroVariant, setSelectedHeroVariant] = useState(1);
 
   useEffect(() => {
@@ -27,7 +25,7 @@ const Index = () => {
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto flex justify-center">
           <img 
-            src="/lovable-uploads/919e7881-6e0b-4bb9-9eea-d4aa9a9a7d55.png" 
+            src="/lovable-uploads/a682db00-a836-4a06-b377-026351a15828.png" 
             alt="reArmenia Academy Logo" 
             className="h-20 md:h-28 object-contain"
           />
@@ -69,26 +67,13 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Debug Info */}
-          {debugMode && <DebugInfo apiKey="AIzaSyAUQi23Gj0riJjH74-yy-H9TbzKqo5vbsc" />}
-
-          {/* Toggle Debug Mode */}
-          <div className="text-center mb-6">
-            <button 
-              onClick={() => setDebugMode(!debugMode)} 
-              className="text-sm font-montserrat text-rearmenia-blue underline"
-            >
-              {debugMode ? "Hide Debug Info" : "Show Debug Info"}
-            </button>
-          </div>
-
-          {/* CTA Button */}
+          {/* CTA Button with enhanced animation */}
           <div className={`text-center mb-20 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <a 
               href="https://forms.gle/ch23zZq7kdzxM9Nb7" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="button-primary text-lg md:text-xl font-montserrat font-semibold inline-flex items-center group"
+              className="pulsing-cta-button text-lg md:text-xl font-montserrat font-semibold inline-flex items-center group"
             >
               Գրանցվում եմ «222» տեքստային AI կուրսին
               <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
