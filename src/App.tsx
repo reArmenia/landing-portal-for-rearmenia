@@ -3,9 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { pageView } from "./utils/analytics";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,17 @@ const getBasePath = () => {
   return '';
 };
 
+// Analytics route change tracker
+const RouteChangeTracker = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    pageView();
+  }, [location]);
+  
+  return null;
+};
+
 const App = () => {
   // Get the base path for routing
   const basePath = getBasePath();
@@ -33,6 +46,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter basename={basePath}>
+          <RouteChangeTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             {/* Add a redirect from '/index' to '/' */}
