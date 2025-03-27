@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import CountdownTimer from "../components/CountdownTimer";
 import RegistrationCounter from "../components/RegistrationCounter";
@@ -5,16 +6,25 @@ import PriceDisplay from "../components/PriceDisplay";
 import ContactSection from "../components/ContactSection";
 import PricingTable from "../components/PricingTable";
 import EnhancedCTAButton from "../components/EnhancedCTAButton";
+import { event } from "../utils/analytics";
+
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  
   useEffect(() => {
     setIsLoaded(true);
+    
+    // Track page load event
+    event('home_page_loaded', {
+      timestamp: new Date().toISOString()
+    });
   }, []);
 
   // Hero section styling variants
   const getHeroCardClass = () => {
     return "hero-stats-mixed";
   };
+  
   return <div className="min-h-screen flex flex-col">
       {/* Header with Logo */}
       <header className={`py-6 px-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -80,4 +90,5 @@ const Index = () => {
       </footer>
     </div>;
 };
+
 export default Index;

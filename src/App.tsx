@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { pageView } from "./utils/analytics";
+import { pageView, isAnalyticsLoaded } from "./utils/analytics";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +30,11 @@ const RouteChangeTracker = () => {
   const location = useLocation();
   
   useEffect(() => {
-    pageView();
+    // Check if GA is loaded on component mount
+    isAnalyticsLoaded();
+    
+    // Track page view on route change
+    pageView(document.title, window.location.href, location.pathname);
   }, [location]);
   
   return null;
@@ -39,6 +43,11 @@ const RouteChangeTracker = () => {
 const App = () => {
   // Get the base path for routing
   const basePath = getBasePath();
+  
+  // Check if Analytics is loaded when app initializes
+  useEffect(() => {
+    isAnalyticsLoaded();
+  }, []);
   
   return (
     <QueryClientProvider client={queryClient}>
