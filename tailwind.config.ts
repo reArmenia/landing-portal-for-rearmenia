@@ -134,8 +134,8 @@ export default {
 				heading: ['Montserrat', 'sans-serif']
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
-				'button': '0 4px 14px 0 rgba(237, 139, 0, 0.25)'
+				'soft': '0 4px 20px rgba(0, 0, 0, 0.15)',
+				'button': '0 4px 14px 0 rgba(237, 139, 0, 0.35)'
 			}
 		}
 	},

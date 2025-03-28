@@ -1,25 +1,29 @@
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { X, Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Base pricing tiers data
 const pricingTiersData = [{
   id: 1,
   range: "1-50",
-  price: "50,000 AMD"
+  price: "50,000 AMD",
+  features: ["Վիդեո դասեր", "Կենդանի հանդիպումներ", "Հետադարձ կապ"]
 }, {
   id: 2,
   range: "51-100",
-  price: "40,000 AMD"
+  price: "40,000 AMD",
+  features: ["Վիդեո դասեր", "Կենդանի հանդիպումներ", "Հետադարձ կապ"]
 }, {
   id: 3,
   range: "101-200",
-  price: "30,000 AMD"
+  price: "30,000 AMD",
+  features: ["Վիդեո դասեր", "Կենդանի հանդիպումներ", "Հետադարձ կապ"]
 }, {
   id: 4,
   range: "201+",
-  price: "20,000 AMD"
+  price: "20,000 AMD",
+  features: ["Վիդեո դասեր", "Կենդանի հանդիպումներ", "Հետադարձ կապ"]
 }];
 
 interface PricingTableProps {
@@ -94,10 +98,10 @@ const PricingTable = ({
     fetchRegistrations();
   }, []);
 
-  // Responsive grid layout with column on mobile
-  const renderTableGrid = () => (
+  // Masterclass style pricing table
+  const renderMasterclassTable = () => (
     <div className="w-full p-4">
-      <h3 className="text-lg font-montserrat font-semibold text-rearmenia-blue mb-6 text-center">
+      <h3 className="text-lg font-montserrat font-semibold text-white mb-6 text-center">
         {loading 
           ? "Բեռնում..." 
           : `Արժեքը կախված է մասնակիցների քանակից՝ ${paidCount} վճարված`}
@@ -108,40 +112,50 @@ const PricingTable = ({
           <div className="animate-pulse text-center font-montserrat">Բեռնում...</div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pricingTiersData.map(tier => {
             const isTierInactive = tier.id < currentTier;
             return (
               <div
                 key={tier.id}
-                className={`relative flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
+                className={`relative flex flex-col items-center justify-between rounded-lg p-6 h-full transition-all ${
                   currentTier === tier.id
-                    ? 'bg-rearmenia-blue text-white ring-2 ring-rearmenia-orange ring-offset-2'
+                    ? 'bg-accent/20 text-white ring-2 ring-accent ring-offset-2 ring-offset-background'
                     : isTierInactive
-                    ? 'bg-gray-100 opacity-75'
-                    : 'bg-gray-50 hover:bg-gray-100'
+                    ? 'bg-secondary/60 opacity-75'
+                    : 'bg-secondary hover:bg-secondary/80'
                 }`}
               >
                 {isTierInactive && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <X className="text-red-500 h-24 w-24 opacity-80" />
+                  <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/40 rounded-lg">
+                    <X className="text-red-500 h-16 w-16 opacity-80" />
                   </div>
                 )}
-                <div
-                  className={`text-lg font-montserrat font-semibold mb-2 ${isTierInactive ? 'opacity-50' : ''}`}
-                >
-                  {tier.range}
-                </div>
-                <div
-                  className={`text-xl font-montserrat font-semibold ${
-                    currentTier === tier.id
-                      ? 'text-rearmenia-orange'
-                      : isTierInactive
-                      ? 'text-gray-400'
-                      : 'text-rearmenia-blue'
-                  }`}
-                >
-                  {tier.price}
+                <div className="space-y-4 w-full">
+                  <div className={`text-lg font-montserrat font-bold mb-2 text-center ${isTierInactive ? 'opacity-50' : ''}`}>
+                    {tier.range}
+                  </div>
+                  <div
+                    className={`text-3xl font-montserrat font-bold text-center ${
+                      currentTier === tier.id
+                        ? 'text-accent'
+                        : isTierInactive
+                        ? 'text-gray-400'
+                        : 'text-white'
+                    }`}
+                  >
+                    {tier.price}
+                  </div>
+                  <div className="pt-4 border-t border-muted">
+                    <ul className="space-y-2">
+                      {tier.features.map((feature, index) => (
+                        <li key={index} className="flex items-center gap-2 text-sm">
+                          <Check className="h-4 w-4 text-accent" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             );
@@ -151,7 +165,7 @@ const PricingTable = ({
     </div>
   );
 
-  return renderTableGrid();
+  return renderMasterclassTable();
 };
 
 export default PricingTable;

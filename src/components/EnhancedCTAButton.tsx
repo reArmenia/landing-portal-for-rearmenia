@@ -13,7 +13,7 @@ const EnhancedCTAButton = ({
   const [isHovered, setIsHovered] = useState(false);
   
   // Base classes for the button
-  const baseClasses = "relative inline-flex items-center justify-center font-montserrat font-semibold text-lg md:text-xl text-white bg-rearmenia-orange px-8 py-4 rounded-lg transition-all overflow-hidden";
+  const baseClasses = "relative inline-flex items-center justify-center font-montserrat font-semibold text-lg md:text-xl text-white bg-accent px-8 py-4 rounded-md transition-all overflow-hidden";
   
   // Hover classes for scaling effect
   const hoverClasses = "hover:scale-105 hover:shadow-button transform transition-transform duration-300";
